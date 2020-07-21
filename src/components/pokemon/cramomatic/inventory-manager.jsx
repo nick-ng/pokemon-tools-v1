@@ -77,7 +77,7 @@ const InventoryManager = ({ updateInventory }) => {
         </thead>
         <tbody>
           {ingredientNames
-            .filter(i => i.includes(itemFilter))
+            .filter(i => i.includes(itemFilter.replaceAll(" ", "_")))
             .map(ingredient => {
               return (
                 <tr key={ingredient}>
