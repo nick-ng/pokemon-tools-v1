@@ -62,7 +62,7 @@ const makeItem = (
       return prev + prices[item];
     }, 0);
 
-    if (resultPrice < bestPrice) {
+    if (resultPrice <= bestPrice) {
       bestPrice = resultPrice;
       bestItems = tempItems;
     }
@@ -83,7 +83,7 @@ const AutoChooser = ({ desiredItem, inventory }) => {
       const { bestPrice, bestItems } = makeItem(
         desiredItem,
         inventory,
-        price,
+        Infinity,
         5
       );
       setPrice(bestPrice);
@@ -112,7 +112,7 @@ const AutoChooser = ({ desiredItem, inventory }) => {
         <button
           onClick={() => {
             const temp = makeItem(desiredItem, inventory, price, 500);
-            if (temp.bestPrice < price) {
+            if (temp.bestPrice <= price) {
               setPrice(temp.bestPrice);
               setItems(temp.bestItems);
             }
