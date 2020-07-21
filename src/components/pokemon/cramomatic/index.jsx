@@ -50,7 +50,9 @@ const Cramomatic = () => {
   const range = selectedRecipe ? recipes[selectedRecipe].range : [0, 0];
 
   useEffect(() => {
-    setExcludedItems(Object.entries(inventory).filter(item => !item?.exclude));
+    setExcludedItems(
+      Object.keys(inventory).filter(item => inventory[item]?.exclude)
+    );
   }, [inventory]);
 
   useEffect(() => {
