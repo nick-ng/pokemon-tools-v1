@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route as R } from "react-router-dom";
+import { HashRouter as Router, Switch, Route as R } from "react-router-dom";
 
 import css from "./styles.css";
 
@@ -20,13 +20,13 @@ export default function App() {
             {/* <R path="/pokemon/evhelper">
                             <PokemonEVHelper />
                         </R> */}
-            <R path="/pokemon/flashcards">
+            <R path="/flashcards">
               <PokemonFlashCards />
             </R>
-            <R path="/pokemon/cramomatic">
+            <R path="/cramomatic">
               <PokemonCramomatic />
             </R>
-            <R path="/pokemon/notes">
+            <R path="/notes">
               <PokemonNotes />
             </R>
             <R path="/">

@@ -8,19 +8,19 @@ import css from "./styles.css";
 const Nav = () => (
   <div className={css.navContainer}>
     <Header />
-    <NavLink icons="fa-gamepad" to="/pokemon/flashcards">
+    <NavLink icons="fa-gamepad" to="/flashcards">
       Flash Cards
     </NavLink>
-    {/* <NavLink icons="fa-gamepad" to="/pokemon/evhelper">
+    {/* <NavLink icons="fa-gamepad" to="/evhelper">
             EV Helper
         </NavLink> */}
     <NavLink
       icons={["fa-gamepad", "fa-shopping-cart"]}
-      to="/pokemon/cramomatic"
+      to="/cramomatic"
     >
       Cram-o-matic Helper
     </NavLink>
-    <NavLink icons="fa-gamepad" to="/pokemon/notes">
+    <NavLink icons="fa-gamepad" to="/notes">
       Pokemon Notes
     </NavLink>
   </div>
