@@ -29,9 +29,9 @@ const makeItem = (
     return prev;
   }, {});
 
-  const excludedItems = Object.keys(inventory).filter(item => {
-    return inventory[item]?.exclude;
-  });
+  const excludedItems = Object.keys(inventory).filter(
+    item => inventory[item]?.exclude
+  );
 
   const recipe = recipes[desiredItem];
 
@@ -79,7 +79,7 @@ const AutoChooser = ({ desiredItem, inventory }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    if (desiredItem) {
+    if (ingredientNames.includes(desiredItem)) {
       const { bestPrice, bestItems } = makeItem(
         desiredItem,
         inventory,
@@ -88,18 +88,21 @@ const AutoChooser = ({ desiredItem, inventory }) => {
       );
       setPrice(bestPrice);
       setItems(bestItems);
+    } else {
+      setPrice(Infinity);
+      setItems([]);
     }
   }, [desiredItem, inventory]);
 
   return (
     <Container>
       <h2>Auto Chooser</h2>
-      {desiredItem ? (
+      {ingredientNames.includes(desiredItem) ? (
         <div>
           <p>{`Making ${startCase(desiredItem)}`}</p>
         </div>
       ) : (
-        <p>Choose an item</p>
+        <h3>Choose an item</h3>
       )}
       {items.length > 0 && (
         <ol>
@@ -108,7 +111,7 @@ const AutoChooser = ({ desiredItem, inventory }) => {
           ))}
         </ol>
       )}
-      {desiredItem && (
+      {ingredientNames.includes(desiredItem) && (
         <button
           onClick={() => {
             const temp = makeItem(desiredItem, inventory, price, 500);

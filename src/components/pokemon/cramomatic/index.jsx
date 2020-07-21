@@ -16,11 +16,30 @@ const Container = styled.div`
   h1 {
     grid-column: 1 / 4;
   }
+
+  @media screen and (max-device-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const ItemMaker = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const Ingredients = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-device-width: 700px) {
+    display: none;
+  }
+
+  span {
+    margin-top: 0.5em;
+  }
 `;
 
 const Item4Choices = styled.ul`
@@ -47,7 +66,7 @@ const Cramomatic = () => {
   const [inventory, setInventory] = useState({});
   const [excludedItems, setExcludedItems] = useState([]);
 
-  const range = selectedRecipe ? recipes[selectedRecipe].range : [0, 0];
+  const range = recipes[selectedRecipe]?.range || [0, 0];
 
   useEffect(() => {
     setExcludedItems(
@@ -109,28 +128,30 @@ const Cramomatic = () => {
           selectedItem={selectedRecipe}
           onSelect={setSelectedRecipe}
         />
-        <h2>Ingredients</h2>
-        <ItemSelector
-          itemList={remainingIngredients1}
-          selectedItem={selectedIngredient1}
-          onSelect={setSelectedIngredient1}
-        />
-        <ItemSelector
-          itemList={remainingIngredients2}
-          selectedItem={selectedIngredient2}
-          onSelect={setSelectedIngredient2}
-        />
-        <ItemSelector
-          itemList={remainingIngredients3}
-          selectedItem={selectedIngredient3}
-          onSelect={setSelectedIngredient3}
-        />
-        <span>Fourth Item:</span>
-        <Item4Choices>
-          {remainingIngredients4.sort().map(ingredient => (
-            <li key={ingredient}>{startCase(ingredient)}</li>
-          ))}
-        </Item4Choices>
+        <Ingredients>
+          <h2>Ingredients</h2>
+          <ItemSelector
+            itemList={remainingIngredients1}
+            selectedItem={selectedIngredient1}
+            onSelect={setSelectedIngredient1}
+          />
+          <ItemSelector
+            itemList={remainingIngredients2}
+            selectedItem={selectedIngredient2}
+            onSelect={setSelectedIngredient2}
+          />
+          <ItemSelector
+            itemList={remainingIngredients3}
+            selectedItem={selectedIngredient3}
+            onSelect={setSelectedIngredient3}
+          />
+          <span>Fourth Item:</span>
+          <Item4Choices>
+            {remainingIngredients4.sort().map(ingredient => (
+              <li key={ingredient}>{startCase(ingredient)}</li>
+            ))}
+          </Item4Choices>
+        </Ingredients>
       </ItemMaker>
       <AutoChooser desiredItem={selectedRecipe} inventory={inventory} />
       <InventoryManager updateInventory={setInventory} />
