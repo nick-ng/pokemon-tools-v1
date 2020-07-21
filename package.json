@@ -5,6 +5,7 @@
   "main": "./src/entry.js",
   "scripts": {
     "build": "NODE_ENV=production webpack",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "prettier-check": "prettier -c \"**/*.js\"",
     "eslint": "eslint ./src",
