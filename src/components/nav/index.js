@@ -1,7 +1,7 @@
 import React from "react";
 
 import Header from "../header";
-import NavLink, { AdminNav } from "./nav-link";
+import NavLink from "./nav-link";
 
 import css from "./styles.css";
 
@@ -14,10 +14,7 @@ const Nav = () => (
     {/* <NavLink icons="fa-gamepad" to="/evhelper">
             EV Helper
         </NavLink> */}
-    <NavLink
-      icons={["fa-gamepad", "fa-shopping-cart"]}
-      to="/cramomatic"
-    >
+    <NavLink icons={["fa-gamepad", "fa-shopping-cart"]} to="/cramomatic">
       Cram-o-matic Helper
     </NavLink>
     <NavLink icons="fa-gamepad" to="/notes">
