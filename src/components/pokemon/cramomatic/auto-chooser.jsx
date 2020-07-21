@@ -115,7 +115,7 @@ const AutoChooser = ({ desiredItem, inventory }) => {
         <button
           onClick={() => {
             const temp = makeItem(desiredItem, inventory, price, 500);
-            if (temp.bestPrice <= price) {
+            if (temp.bestPrice <= price && temp.bestItems.length === 4) {
               setPrice(temp.bestPrice);
               setItems(temp.bestItems);
             }
