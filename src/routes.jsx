@@ -12,7 +12,7 @@ import PokemonNotes from "./components/pokemon/notes";
 
 export default function App() {
   return (
-    <Router basename="pokemon-tools">
+    <Router>
       <div className={css.container}>
         <Nav />
         <div className={css.pageContent}>
