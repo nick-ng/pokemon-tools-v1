@@ -11,6 +11,7 @@ import { validRemainingItems } from "./utils";
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
 
   h1 {
     grid-column: 1 / 4;

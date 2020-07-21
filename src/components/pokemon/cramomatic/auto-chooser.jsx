@@ -15,7 +15,12 @@ const randomItem = items => items[Math.floor(Math.random() * items.length)];
 
 const getItemPrice = count => BASE_VALUE / (count + 1);
 
-const makeItem = (desiredItem, inventory, startingPrice = Infinity) => {
+const makeItem = (
+  desiredItem,
+  inventory,
+  startingPrice = Infinity,
+  count = 10
+) => {
   let bestPrice = startingPrice;
   let bestItems = [];
 
@@ -30,7 +35,7 @@ const makeItem = (desiredItem, inventory, startingPrice = Infinity) => {
 
   const recipe = recipes[desiredItem];
 
-  for (let n = 0; n < 1000; n++) {
+  for (let n = 0; n < count; n++) {
     const tempItems = [];
     const itemsA = validRemainingItems(
       recipe.range,
@@ -74,8 +79,16 @@ const AutoChooser = ({ desiredItem, inventory }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    setPrice(Infinity);
-    setItems([]);
+    if (desiredItem) {
+      const { bestPrice, bestItems } = makeItem(
+        desiredItem,
+        inventory,
+        price,
+        5
+      );
+      setPrice(bestPrice);
+      setItems(bestItems);
+    }
   }, [desiredItem, inventory]);
 
   return (
@@ -83,15 +96,7 @@ const AutoChooser = ({ desiredItem, inventory }) => {
       <h2>Auto Chooser</h2>
       {desiredItem ? (
         <div>
-          <button
-            onClick={() => {
-              const temp = makeItem(desiredItem, inventory, price);
-              if (temp.bestPrice < price) {
-                setPrice(temp.bestPrice);
-                setItems(temp.bestItems);
-              }
-            }}
-          >{`Make ${startCase(desiredItem)}`}</button>
+          <p>{`Making ${startCase(desiredItem)}`}</p>
         </div>
       ) : (
         <p>Choose an item</p>
@@ -103,7 +108,39 @@ const AutoChooser = ({ desiredItem, inventory }) => {
           ))}
         </ol>
       )}
-      {}
+      {desiredItem && (
+        <button
+          onClick={() => {
+            const temp = makeItem(desiredItem, inventory, price, 500);
+            if (temp.bestPrice < price) {
+              setPrice(temp.bestPrice);
+              setItems(temp.bestItems);
+            }
+          }}
+        >
+          Try Again
+        </button>
+      )}
+      <p>
+        The Auto Chooser won't use items marked with "Don't Use" and will prefer
+        items you have more of. It randomly tries combinations of items and
+        shows the combination that uses your most "plentiful" items. You can
+        press the "Try Again" button to see if it can find a better combination.
+      </p>
+      <h3>What is this?</h3>
+      <p>
+        The Cram-o-Matic is a feature introduced in the Isle of Armor DLC for
+        Pokemon Sword/Shield. You can combine 4 items to make another item and
+        the item you get is{" "}
+        <a
+          href="https://www.serebii.net/swordshield/cram-o-matic.shtml"
+          target="_blank"
+        >
+          determined by what items you put in
+        </a>
+        . This tool figures out what items you should "give" the Cram-o-Matic to
+        get the item you want.
+      </p>
     </Container>
   );
 };

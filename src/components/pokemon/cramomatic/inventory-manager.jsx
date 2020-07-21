@@ -6,9 +6,7 @@ import { ingredientNames, ingredients, recipes } from "./item-data";
 
 const CRAMOMATIC_INVENTORY_KEY = "CRAMOMATIC_INVENTORY_KEY";
 
-const Container = styled.div`
-  justify-self: center;
-`;
+const Container = styled.div``;
 
 const Table = styled.table`
   margin-top: 1em;
@@ -61,6 +59,7 @@ const InventoryManager = ({ updateInventory }) => {
       <label>
         Item Filter
         <input
+          style={{ marginLeft: "0.5em" }}
           value={itemFilter}
           onChange={e => {
             setItemFilter(e.target.value);

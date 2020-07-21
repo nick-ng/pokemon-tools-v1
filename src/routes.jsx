@@ -14,23 +14,23 @@ export default function App() {
   return (
     <Router>
       <div className={css.container}>
-        <Nav />
+        {/* <Nav /> */}
         <div className={css.pageContent}>
           <Switch>
             {/* <R path="/pokemon/evhelper">
                             <PokemonEVHelper />
                         </R> */}
-            <R path="/flashcards">
+            {/* <R path="/flashcards">
               <PokemonFlashCards />
-            </R>
+            </R> */}
             <R path="/cramomatic">
               <PokemonCramomatic />
             </R>
-            <R path="/notes">
+            {/* <R path="/notes">
               <PokemonNotes />
-            </R>
+            </R> */}
             <R path="/">
-              <Home />
+            <PokemonCramomatic />
             </R>
           </Switch>
         </div>
